@@ -41,6 +41,24 @@ src/
 ```
 
 ---
+## Terminal Setup & Execution Commands
+
+Follow these exact terminal commands step-by-step to set up, build, and run the project locally:
+
+```bash
+# 1. Create a new Next.js project with App Router and TypeScript
+npx create-next-app@latest hand-tracker-app --typescript --tailwind --eslint --app --src-dir --import-alias "@/*"
+
+# 2. Navigate into the project directory
+cd hand-tracker-app
+
+# 3. Install MediaPipe Vision Tasks package
+npm install @mediapipe/tasks-vision
+
+# 4. Start the local development server
+npm run dev
+
+---
 
 ## Getting Started
 
