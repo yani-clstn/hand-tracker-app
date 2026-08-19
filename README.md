@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hand Tracker
+
+An interactive, web-based computer vision application built with **Next.js**, **MediaPipe Tasks Vision**, and **HTML5 Canvas**. The application captures real-time webcam video directly in the browser to perform 21-point hand landmark estimation, real-time pinch gesture detection, dynamic geometric shape warping, and customizable neon glow visual effects.
+
+---
+
+## Features
+
+- **Client-Side Vision Processing:** Zero server latency; all machine learning inference runs locally in the browser using WebAssembly (WASM).
+- **Multi-Hand Landmark Tracking:** Simultaneously detects and tracks skeletal joints for up to two hands in real time.
+- **Pinch & Distance Detection:** Calculates real-time Euclidean distance between thumb and index fingertips to trigger dynamic visual states.
+- **Interactive Geometric Overlay:** Draws animated boundary polygons and curved shapes across multiple hands that react directly to user gestures.
+- **Neon Aesthetic:** High-contrast cyberpunk palette (Electric Cyan, Lime Green, Magenta) with dynamic light emissions via WebGL/Canvas rendering.
+- **Vercel Ready:** Fully configured for deployment as a static/serverless web app on Vercel.
+
+---
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/) (App Router, React 19, TypeScript)
+- **Computer Vision / ML:** [`@mediapipe/tasks-vision`](https://www.npmjs.com/package/@mediapipe/tasks-vision)
+- **Rendering Engine:** HTML5 Canvas 2D API (`CanvasRenderingContext2D`)
+- **Media Access:** HTML5 `navigator.mediaDevices.getUserMedia` API
+
+---
+
+## File Structure
+
+```text
+src/
+├── app/
+│   ├── globals.css          # Core CSS reset & canvas layering styles
+│   ├── layout.tsx           # Main application root layout
+│   └── page.tsx             # Entry page rendering the HandTracker component
+├── components/
+│   └── HandTracker.tsx      # Main canvas overlay, render loop, and landmark drawing
+└── lib/
+    ├── handLandmarker.ts    # MediaPipe WASM model initialization helper
+    └── useWebcam.ts         # Custom hook for camera permissions and video stream
+
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+* **Node.js:** `v18.17.0` or higher
+* **Package Manager:** `npm` (v9+) or `yarn` / `pnpm`
+* **Webcam:** Integrated or external USB camera
+
+### Installation
+
+1. **Clone the repository:**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [https://github.com/your-username/hand-tracker-app.git](https://github.com/your-username/hand-tracker-app.git)
+cd hand-tracker-app
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Install dependencies:**
+```bash
+npm install
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+3. **Run the development server:**
+```bash
+npm run dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+4. Open `http://localhost:3000` in your browser and allow webcam permissions when prompted.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> **Note:** HTTPS is required by browser security policies for webcam access (`getUserMedia`). Vercel provides automatic SSL certificates for all deployed apps.
+
+```
